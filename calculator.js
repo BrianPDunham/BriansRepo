@@ -7,20 +7,22 @@ const rl = readline.createInterface({
 (async () => {
  
 
-let theuserinput = await rl.question("What operation?");
-if (theuserinput=== "divide") {
+let theuserinput = await rl.question("What operation? \n1. Add\n2. Subtract\n3. Multiply\n4. Divide\n");
+
+
+if (theuserinput=== "4") {
     
-    let int1 = await rl.question("Input First Number");
-    let int2 = await rl.question("Input Second Number");
+    let int1 = await rl.question("Input First Number: ");
+    let int2 = await rl.question("Input Second Number: ");
     let Cint1 = parseFloat(int1);
     let Cint2 = parseFloat(int2);
 
     let theanwser = Cint1 / Cint2;
     console.log(theanwser);
     
-  } else if (theuserinput=== "multiply") {
-    let int1 = await rl.question("Input First Number");
-    let int2 = await rl.question("Input Second Number");
+  } else if (theuserinput=== "3") {
+    let int1 = await rl.question("Input First Number: ");
+    let int2 = await rl.question("Input Second Number: ");
 
     let Cint1 = parseFloat(int1);
     let Cint2 = parseFloat(int2);
@@ -28,9 +30,9 @@ if (theuserinput=== "divide") {
     let theanwser2 = Cint1 * Cint2;
     console.log(theanwser2);
 
-  } else if (theuserinput=== "add") {
-    let int1 = await rl.question("Input First Number");
-    let int2 = await rl.question("Input Second Number");
+  } else if (theuserinput=== "1") {
+    let int1 = await rl.question("Input First Number: ");
+    let int2 = await rl.question("Input Second Number: ");
 
     let Cint1 = parseFloat(int1);
     let Cint2 = parseFloat(int2);
@@ -39,10 +41,10 @@ if (theuserinput=== "divide") {
     let theanwser3 = Cint1 + Cint2;
     console.log(theanwser3);
 
-  } else if (theuserinput==="subtract") {
+  } else if (theuserinput=== "2") {
 
-    let int1 = await rl.question("Input First Number");
-    let int2 = await rl.question("Input Second Number");
+    let int1 = await rl.question("Input First Number: ");
+    let int2 = await rl.question("Input Second Number: ");
 
     let Cint1 = parseFloat(int1);
     let Cint2 = parseFloat(int2);
@@ -57,10 +59,5 @@ if (theuserinput=== "divide") {
     console.log("Invalid Input");
 
   }
-
-
-console.log(theuserinput);
-
-
     rl.close();
   })();
