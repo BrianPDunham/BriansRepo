@@ -7,12 +7,10 @@ const ADDITION = 0;
 const SUBTRACTION = 1;
 const MULTIPLY = 2;
 const DIVIDE = 3;
-
 async function getOperation() {
-
   let isSelectingOp = true;
 
-  while (isSelectingOp === true) {
+  while (isSelectingOp) {
 
     let Operations = await rl.question("What operation? \n1. Add\n2. Subtract\n3. Multiply\n4. Divide\n");
     if (Operations === "1") {
@@ -38,8 +36,19 @@ async function getOperation() {
 }
 
 async function getOperand() {
-  let Operand = parseFloat(await rl.question("Input Operand: "));
-  return Operand;
+  let isSelectingOperand = true;
+  
+  while (isSelectingOperand) {
+    let Operand = parseFloat(await rl.question("Input Operand: "));
+    if (!(isNaN(Operand))) {
+    isSelectingOperand = false;
+    return Operand;    
+    }
+    else {
+    console.log("Invalid Input");
+    }
+
+  }
 }
 
 function compute (selectedOperation, firstOperand, secondOperand) {
@@ -59,11 +68,11 @@ function compute (selectedOperation, firstOperand, secondOperand) {
 
 (async () => {
 
-const selectedOperation = await getOperation();
-const firstOperand = await getOperand();
-const secondOperand = await getOperand();
-const result = compute(selectedOperation, firstOperand, secondOperand);
-console.log(result);
+  const selectedOperation = await getOperation();
+  const firstOperand = await getOperand();
+  const secondOperand = await getOperand();
+  const result = compute(selectedOperation, firstOperand, secondOperand);
+  console.log(result);
 
     rl.close();
-  })();
+})();
