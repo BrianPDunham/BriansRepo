@@ -37,18 +37,18 @@ async function getOperation() {
 
 async function getOperand() {
   let isSelectingOperand = true;
-  
+  let Operand;
   while (isSelectingOperand) {
-    let Operand = parseFloat(await rl.question("Input Operand: "));
+    Operand = parseFloat(await rl.question("Input Operand: "));
     if (!(isNaN(Operand))) {
-    isSelectingOperand = false;
-    return Operand;    
+        isSelectingOperand = false;    
     }
     else {
-    console.log("Invalid Input");
+      console.log("Invalid Input");
     }
 
   }
+  return Operand;
 }
 
 function compute (selectedOperation, firstOperand, secondOperand) {
