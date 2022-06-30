@@ -7,12 +7,13 @@ const ADDITION = 0;
 const SUBTRACTION = 1;
 const MULTIPLY = 2;
 const DIVIDE = 3;
+const FINISH = 4;
 async function getOperation() {
   let isSelectingOp = true;
 
   while (isSelectingOp) {
 
-    let Operations = await rl.question("What operation? \n1. Add\n2. Subtract\n3. Multiply\n4. Divide\n");
+    let Operations = await rl.question("What operation? \n1. Add\n2. Subtract\n3. Multiply\n4. Divide\n5. Finish\n");
     if (Operations === "1") {
       isSelectingOp = false;
       return ADDITION;
@@ -28,6 +29,10 @@ async function getOperation() {
     else if (Operations === "4") {
       isSelectingOp = false;
       return DIVIDE;
+    }
+    else if (Operations === "5") {
+      isSelectingOp = false;
+      return FINISH;
     }
     else {
       console.log("Invalid Input");
@@ -67,12 +72,43 @@ function compute (selectedOperation, firstOperand, secondOperand) {
 }
 
 (async () => {
+  let selectedOperation
+  let isSelectingOperation = true;
+  while (isSelectingOperation) {
+    selectedOperation = await getOperation();
+    if (selectedOperation !== FINISH) {
+      isSelectingOperation = false;
+    }
+    else if (selectedOperation === FINISH) {
+      console.log("Error. Must select at least one operation.")
+    }
+  }
 
-  const selectedOperation = await getOperation();
-  const firstOperand = await getOperand();
-  const secondOperand = await getOperand();
-  const result = compute(selectedOperation, firstOperand, secondOperand);
-  console.log(result);
+  let firstOperand = await getOperand();
+  let secondOperand = await getOperand();
+  let result = compute(selectedOperation, firstOperand, secondOperand);
+
+
+  let isDoingMath = true;
+  while (isDoingMath) {
+    selectedOperation = await getOperation();
+    if (selectedOperation !== FINISH) {
+      firstOperand = result;
+      secondOperand = await getOperand();
+      result = compute(selectedOperation, firstOperand, secondOperand);
+    }
+    else if (selectedOperation === FINISH) {
+      isDoingMath = false;
+      console.log(result);
+    }
+
+
+  }
+
+
+
+
+  
 
     rl.close();
 })();
