@@ -70,6 +70,23 @@ function compute (selectedOperation, firstOperand, secondOperand) {
     return firstOperand / secondOperand;
   }
 }
+function getOperationSymbol(selectedOperation) {
+  let operationSymbol;
+  if (selectedOperation == ADDITION) {
+    operationSymbol = "+";
+  }
+  else if (selectedOperation == SUBTRACTION) {
+    operationSymbol = "-";
+  }
+  else if (selectedOperation == MULTIPLY) {
+    operationSymbol = "*";
+  }
+  else if (selectedOperation == DIVIDE) {
+    operationSymbol = "/";
+  }
+  return operationSymbol;
+
+}
 
 (async () => {
   let selectedOperation
@@ -84,22 +101,37 @@ function compute (selectedOperation, firstOperand, secondOperand) {
     }
   }
 
+  let fullDisplayOperation = "\n";
   let firstOperand = await getOperand();
+  fullDisplayOperation = fullDisplayOperation + firstOperand;
+  console.log(fullDisplayOperation);
   let secondOperand = await getOperand();
-  let result = compute(selectedOperation, firstOperand, secondOperand);
+  fullDisplayOperation = fullDisplayOperation + getOperationSymbol(selectedOperation) +  secondOperand;
 
+  
+
+
+
+
+
+  let result = compute(selectedOperation, firstOperand, secondOperand);
+  console.log(fullDisplayOperation);
 
   let isDoingMath = true;
   while (isDoingMath) {
     selectedOperation = await getOperation();
     if (selectedOperation !== FINISH) {
+
       firstOperand = result;
+
       secondOperand = await getOperand();
+      fullDisplayOperation = fullDisplayOperation + getOperationSymbol(selectedOperation) + secondOperand;
+      console.log(fullDisplayOperation);
       result = compute(selectedOperation, firstOperand, secondOperand);
     }
     else if (selectedOperation === FINISH) {
       isDoingMath = false;
-      console.log(result);
+      console.log(fullDisplayOperation + "=" + result);
     }
 
 
