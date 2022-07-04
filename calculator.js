@@ -108,12 +108,6 @@ function getOperationSymbol(selectedOperation) {
   let secondOperand = await getOperand();
   fullDisplayOperation = fullDisplayOperation + getOperationSymbol(selectedOperation) +  secondOperand;
 
-  
-
-
-
-
-
   let result = compute(selectedOperation, firstOperand, secondOperand);
   console.log(fullDisplayOperation);
 
@@ -123,24 +117,16 @@ function getOperationSymbol(selectedOperation) {
     if (selectedOperation !== FINISH) {
 
       firstOperand = result;
-
       secondOperand = await getOperand();
       fullDisplayOperation = fullDisplayOperation + getOperationSymbol(selectedOperation) + secondOperand;
       console.log(fullDisplayOperation);
       result = compute(selectedOperation, firstOperand, secondOperand);
+
     }
     else if (selectedOperation === FINISH) {
       isDoingMath = false;
       console.log(fullDisplayOperation + "=" + result);
     }
-
-
   }
-
-
-
-
-  
-
     rl.close();
 })();
